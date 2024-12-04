@@ -1,0 +1,35 @@
+.header {
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+}
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+}
+.nav-link-container {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 15px;
+}
+.nav-link {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    text-decoration: none;
+    color: azure;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.nav-link:hover {
+    color: #fff;
+}
+.nav-link-active {
+    color: orange;
+}
