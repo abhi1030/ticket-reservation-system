@@ -19,9 +19,10 @@ const axios = Axios.create({
         'Accept': 'application/json',
     },
     withCredentials: true,
+    withXSRFToken: true,
 });
 
 // Set the CSRF token from the cookie in the X-XSRF-TOKEN header
-axios.defaults.headers.common['X-XSRF-TOKEN'] = getCookie('XSRF-TOKEN');
+// axios.defaults.headers.common['X-XSRF-TOKEN'] = getCookie('XSRF-TOKEN');
 
 export default axios
