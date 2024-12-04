@@ -32,7 +32,9 @@ const login = async (email: string, password: string) => {
     });
 }
 
-const register = (name: string, email: string, password: string, confirmPassword: string) => {
+const register = async (name: string, email: string, password: string, confirmPassword: string) => {
+    await csrf();
+
     return new Promise((resolve, reject) => {
         if (password !== confirmPassword) {
             reject('Passwords do not match');
@@ -61,7 +63,9 @@ const register = (name: string, email: string, password: string, confirmPassword
     });
 }
 
-const logout = () => {
+const logout = async () => {
+    await csrf();
+    
     return new Promise(async (resolve, reject) => {
         axios.post('/logout').then(() => {
             resolve(void 0);
