@@ -1,28 +1,26 @@
 import Axios from 'axios'
 
-
-// Function to get the CSRF token from the cookies
-function getCookie(name: string): string {
-    let value = '; ' + document.cookie;
-    let parts = value.split('; ' + name + '=');
-    if (parts.length === 2) {
-        const token =  parts.pop()!.split(';').shift()!;
-        return decodeURIComponent(token);
-    }
-    return '';
+const getAuthToken = () => {
+    const token = localStorage.getItem('authToken');
+    return token ? `Bearer ${token}` : null;
 }
 
 const axios = Axios.create({
     baseURL: process.env.REACT_APP_BACKEND_URL,
-    headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'Accept': 'application/json',
-    },
-    withCredentials: true,
-    withXSRFToken: true,
 });
 
-// Set the CSRF token from the cookie in the X-XSRF-TOKEN header
-// axios.defaults.headers.common['X-XSRF-TOKEN'] = getCookie('XSRF-TOKEN');
+// Adding a request interceptor to dynamically set the Authorization header
+axios.interceptors.request.use(
+    (config) => {
+        const token = getAuthToken();  // Get the token dynamically
+        if (token) {
+            config.headers['Authorization'] = token;  // Set the token in the request headers
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
 
 export default axios

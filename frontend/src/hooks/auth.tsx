@@ -1,14 +1,13 @@
 import axios from '../lib/axios'
 import { AxiosError } from 'axios';
 
-const csrf = () => axios.get('/sanctum/csrf-cookie');
-
-const login = async (email: string, password: string) => {
-    await csrf();
-
+const login = (email: string, password: string) => {
     return new Promise((resolve, reject) => {
-        axios.post('/login', { email, password })
-            .then(() => {
+        axios.post('/api/login', { email, password })
+            .then((res) => {
+                // set token in local storage
+                localStorage.setItem('authToken', res.data.token);
+
                 // get user data
                 axios.get('/api/user')
                     .then(response => resolve(response.data))
@@ -32,15 +31,16 @@ const login = async (email: string, password: string) => {
     });
 }
 
-const register = async (name: string, email: string, password: string, confirmPassword: string) => {
-    await csrf();
-
+const register = (name: string, email: string, password: string, confirmPassword: string) => {
     return new Promise((resolve, reject) => {
         if (password !== confirmPassword) {
             reject('Passwords do not match');
         }
-        axios.post('/register', { name, email, password, password_confirmation: confirmPassword })
-            .then(() => {
+        axios.post('/api/register', { name, email, password, password_confirmation: confirmPassword })
+            .then((res) => {
+                // set token in local storage
+                localStorage.setItem('authToken', res.data.token);
+
                 // get user data
                 axios.get('/api/user')
                     .then(response => resolve(response.data))
@@ -64,12 +64,12 @@ const register = async (name: string, email: string, password: string, confirmPa
 }
 
 const logout = async () => {
-    await csrf();
-    
     return new Promise(async (resolve, reject) => {
-        axios.post('/logout').then(() => {
+        axios.post('/api/logout').then(() => {
             resolve(void 0);
         }).catch(error => {
+            if(error.response && error.response.status === 401) resolve(void 0);
+            
             reject(error);
         });
     });
