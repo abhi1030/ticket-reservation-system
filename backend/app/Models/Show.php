@@ -9,6 +9,9 @@ class Show extends Model
 {
     use HasFactory;
 
+    const AVAILABLE_SLOTS = ['morning', 'afternoon', 'evening'];
+    const TOTAL_SEATS = 20;
+
     protected $fillable = [
         'movie_id',
         'date',

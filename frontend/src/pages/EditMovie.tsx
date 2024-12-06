@@ -4,6 +4,8 @@ import { Movie, getMovie, updateMovie } from "../hooks/movie";
 import { useLoading } from "../context/PageLoadingContext";
 import LoaderSpinner from '../components/loaders/LoadingSpinner';
 import MovieEditor from "../components/Movie/MovieEditor";
+import MovieSlot from "../components/Movie/MovieSlot";
+import MovieSlotAdd from "../components/Movie/MovieSlotAdd";
 
 const EditMovie = () => {
     const { movieId } = useParams();
@@ -20,7 +22,7 @@ const EditMovie = () => {
         }
     }, []);
 
-    const handleSave = (movie: Movie) : Promise<Movie> => {
+    const handleSave = (movie: Movie): Promise<Movie> => {
         return new Promise((resolve, reject) => {
             setLoadingState(true);
             // Save movie data to API
@@ -45,6 +47,15 @@ const EditMovie = () => {
             <div className="page-content-header">
                 <p className="page-content-header-title">Edit Movie</p>
                 <p>Movie ID: {movieId}</p>
+            </div>
+
+            <div className="movie-slots-container">
+                <div className="movie-slots-header">Available Shows</div>
+                {movieData?.shows?.length ? (
+                    <div className="movie-slots-inner-container">
+                        {movieData.shows.map((slot, i) => <MovieSlot key={i} slot={slot} />)}
+                    </div>
+                ) : movieData?.id ? <MovieSlotAdd movieData={movieData} setMovieData={setMovieData}/> : <LoaderSpinner /> }
             </div>
 
             <div className="edit-movie-container">

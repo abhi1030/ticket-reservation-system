@@ -1,0 +1,53 @@
+.add-slot-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+  padding: 20px;
+  min-height: 100px;
+}
+.add-slot-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+.add-slot-form {
+  display: flex;
+  justify-content: center;
+  background-color: #efefef;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.add-slot-form-item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+.add-slot-form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+  flex-shrink: 0;
+  padding: 0 5px;
+}
+.add-slot-form-input {
+  font-size: 12px;
+  height: 25px;
+  max-width: 100px;
+  border: none;
+  outline: none;
+  padding-left: 5px;
+}
+.add-slot-form-input[type="number"] {
+  width: 50px;
+}
+.add-slot-btn {
+  border: none;
+  padding: 5px 10px;
+  margin: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: rgb(255, 128, 0);
+  color: #fff;
+  cursor: pointer;
+}

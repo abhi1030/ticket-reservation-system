@@ -62,3 +62,25 @@
 .edit-movie-container {
     height: 100%;
 }
+.movie-slots-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    min-height: 150px;
+    flex-shrink: 0;
+}
+
+.movie-slots-inner-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 15px;
+}
+.movie-slots-header {
+    font-size: 20px;
+    padding: 15px;
+    font-weight: 600;
+    background-color: #e9ecef;
+    letter-spacing: 1px;
+}

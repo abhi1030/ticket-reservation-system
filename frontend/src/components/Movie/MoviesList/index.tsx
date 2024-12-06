@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from 'react-router-dom';
 import { listMovies, Movie } from "../../../hooks/movie";
 import MovieCard from "../MovieCard";
+import LoadingSpinner from "../../loaders/LoadingSpinner";
 
 const MoviesList = () => {
     const [moviesList , setMoviesList] = useState<Movie[]>([]);
@@ -15,7 +16,7 @@ const MoviesList = () => {
     }, [])
 
     return (
-        <div>
+        <>
             <div className="page-content-header">
                 <p className="page-content-header-title">Movies List</p>
                 <div className="page-content-header-actions">
@@ -27,9 +28,9 @@ const MoviesList = () => {
             <div className="movies-list">
                 {moviesList.length ? moviesList.map((movie) => (
                     <MovieCard key={movie.id} movie={movie} />
-                )) :  <p>Loading...</p>}
+                )) :  <LoadingSpinner />}
             </div>
-        </div>
+        </>
     );
 }
 

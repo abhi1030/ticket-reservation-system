@@ -1,5 +1,16 @@
 import axios from '../lib/axios'
 
+
+export interface Show {
+    id: number;
+    movie_id: number;
+    date: string;
+    slot: string;
+    ticket_price: number;
+    total_seats: number;
+    available_seats: number;
+}
+
 export interface Movie {
     id?: number;
     name: string;
@@ -8,6 +19,7 @@ export interface Movie {
     overview: string;
     genre: string;
     language: string;
+    shows?: Show[];
 }
 
 const listMovies = () => {
@@ -67,4 +79,15 @@ const deleteMovie = (id: number) => {
     });
 };
 
-export { listMovies, getMovie, createMovie, updateMovie, deleteMovie };
+const createShows = (movieId: number, ticketPrice: string, startDate: string, endDate: string): Promise<Show[]> => {
+    return new Promise((resolve, reject) => {
+        axios.post(`/api/movies/${movieId}/create-shows`, { ticket_price: ticketPrice, start_date: startDate, end_date: endDate }).then((res) => {
+            resolve(res.data.shows as Show[]);
+        }).catch(error => {
+            if (error.response && error.response.status === 401) reject(void 0);
+            reject(error);
+        });
+    });
+};
+
+export { listMovies, getMovie, createMovie, updateMovie, deleteMovie, createShows };
