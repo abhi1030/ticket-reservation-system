@@ -59,13 +59,6 @@ const Header = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink
-                                        className={({ isActive }) => isActive ? "nav-link nav-link-active" : "nav-link"}
-                                        to="/purchase-ticket">
-                                        Purchase Ticket
-                                    </NavLink>
-                                </li>
-                                <li>
                                     <button className="nav-link" onClick={handleLogout}>Logout</button>
                                 </li>
                             </>

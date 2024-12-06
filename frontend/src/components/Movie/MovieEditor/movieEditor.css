@@ -1,0 +1,44 @@
+.movie-editor-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+}
+.movie-editor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background-color: #f2f2f2;
+}
+.movie-editor-item-group {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 10px;
+    align-items: center;
+}
+.movie-editor-item-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #343a40;
+}
+.movie-editor-item-input {
+    padding: 10px;
+    background-color: #fff;
+    border: none;
+}
+.movie-editor-item-textarea {
+    padding: 10px;
+    line-height: 1.2;
+    background-color: #fff;
+    border: none;
+}
+.movie-editor-item-button {
+    padding: 10px 20px;
+    background-color: #1086b5;
+    color: #fff;
+    border: none;
+    width: fit-content;
+    align-self: flex-end;
+    margin-top: 20px;
+    cursor: pointer;
+}

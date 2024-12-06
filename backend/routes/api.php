@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\MovieController;
 
 // protected Routes
 Route::group(['middleware' => 'auth:sanctum'], function () {
@@ -10,6 +11,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         return $request->user();
     });
     Route::post('/logout', [AuthController::class, 'logoutUser']);
+    
+    Route::apiResource('movies', MovieController::class);
+    // Route::get('movies/{movie}/tickets', [TicketController::class, 'index']);
+    // Route::post('movies/{movie}/tickets/reserve', [TicketController::class, 'reserve']);
+    // Route::post('movies/{movie}/tickets/cancel', [TicketController::class, 'cancel']);
 });
 
 // Public Routes

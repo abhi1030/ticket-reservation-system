@@ -9,6 +9,11 @@ import PurchaseTicket from './pages/PurchaseTicket';
 import PublicRoute from './components/PublicRoute';
 import { useLoading } from './context/PageLoadingContext';
 import PageLoader from './components/loaders/PageLoader';
+import DashboardLayout from './components/Layouts/DashboardLayout';
+import Movies from './pages/Movies';
+import EditMovie from './pages/EditMovie';
+import CreateMovie from './pages/CreateMovie';
+import Tickets from './pages/Tickets';
 
 const AppRoutes = () => {
     const { loading } = useLoading();
@@ -20,22 +25,18 @@ const AppRoutes = () => {
                 <Header />
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/login" element={
-                        <PublicRoute>
-                            <Login />
-                        </PublicRoute>} />
-                    <Route path="/signup" element={
-                        <PublicRoute>
-                            <Signup />
-                        </PublicRoute>} />
-                    <Route path="/dashboard" element={
-                        <ProtectedRoute>
-                            <Dashboard />
-                        </ProtectedRoute>} />
-                    <Route path="/purchase-ticket" element={
-                        <ProtectedRoute>
-                            <PurchaseTicket />
-                        </ProtectedRoute>} />
+
+                    {/* Public Routes */}
+                    <Route path="/" element={<PublicRoute><Login /></PublicRoute>} />
+                    <Route path="/" element={<PublicRoute><Signup /></PublicRoute>} />
+                    
+                    {/* Protected Routes with Dashboard Layout */}
+                    <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout><Dashboard /></DashboardLayout></ProtectedRoute>} />
+                    <Route path="/movies" element={<ProtectedRoute><DashboardLayout><Movies /></DashboardLayout></ProtectedRoute>} />
+                    <Route path="/movies/create" element={<ProtectedRoute><DashboardLayout><CreateMovie /></DashboardLayout></ProtectedRoute>} />
+                    <Route path="/movies/:movieId" element={<ProtectedRoute><DashboardLayout><EditMovie /></DashboardLayout></ProtectedRoute>} />
+                    <Route path="/tickets" element={<ProtectedRoute><DashboardLayout><Tickets /></DashboardLayout></ProtectedRoute>} />
+                    <Route path="/purchase-ticket" element={<ProtectedRoute><DashboardLayout><PurchaseTicket /></DashboardLayout></ProtectedRoute>} />
                 </Routes>
             </Router>
         </>

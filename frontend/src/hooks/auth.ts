@@ -63,8 +63,8 @@ const register = (name: string, email: string, password: string, confirmPassword
     });
 }
 
-const logout = async () => {
-    return new Promise(async (resolve, reject) => {
+const logout = () => {
+    return new Promise((resolve, reject) => {
         axios.post('/api/logout').then(() => {
             resolve(void 0);
         }).catch(error => {
@@ -75,4 +75,5 @@ const logout = async () => {
     });
 }
 
-export default { login, register, logout };
+const Auth = { login, register, logout };
+export default Auth
