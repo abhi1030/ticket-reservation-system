@@ -84,3 +84,24 @@
     background-color: #e9ecef;
     letter-spacing: 1px;
 }
+.shows-not-available {
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    height: 100%;
+    font-size:20px;
+    font-weight:600;
+    color:#444;
+}
+.booking-section {
+    height: 100%;
+}
+.book-ticket-shows-wrapper {
+    display: grid;
+}
+.book-ticket-shows-container {
+    display: flex;
+    overflow: auto;
+    gap: 15px;
+    padding: 15px;
+}

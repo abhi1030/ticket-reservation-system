@@ -9,9 +9,14 @@ class Ticket extends Model
 {
     use HasFactory;
 
+    const STATUS_BOOKED = 'booked';
+    const STATUS_CANCELED = 'canceled';
+    const STATUS_PENDING = 'pending';
+    
     protected $fillable = [
         'user_id',
         'show_id',
+        'payment_id',
         'seat_no',
         'status',
     ];
@@ -31,6 +36,6 @@ class Ticket extends Model
     // A ticket has a payment
     public function payment()
     {
-        return $this->hasOne(Payment::class);
+        return $this->belongsTo(Payment::class);
     }
 }

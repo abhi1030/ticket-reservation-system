@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ticket_id')->constrained('tickets')->onDelete('cascade');
-            $table->string('payment_method'); // e.g., Razorpay, Stripe, etc.
-            $table->string('transaction_id')->unique(); // Unique transaction ID from the payment gateway
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('payment_method')->nullable(); // e.g., Razorpay, Stripe, etc.
             $table->integer('amount'); // Amount paid
+            $table->string('currency'); // Amount paid
+            $table->string('order_id')->unique(); // Unique order ID
+            $table->string('transaction_id')->unique()->nullable(); // Unique payment transaction ID from the payment gateway
+            $table->string('signature')->unique()->nullable(); // Payment description
             $table->enum('status', ['pending', 'completed', 'failed'])->default('pending'); // Payment status
             $table->timestamps();
         });

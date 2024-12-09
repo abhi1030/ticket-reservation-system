@@ -23,8 +23,8 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({children}) => {
                 </NavLink></li>
                 <li><NavLink
                     className={({ isActive }) => isActive ? "sidebar-link sidebar-link-active" : "sidebar-link"}
-                    to="/tickets">
-                    Tickets
+                    to="/bookings">
+                    My Bookings
                 </NavLink></li>
             </ul></nav>
 

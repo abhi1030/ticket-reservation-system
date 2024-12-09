@@ -19,24 +19,19 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, preview }) => {
         if (movie.id === undefined) return;
 
         setLoadingState(true);
-
-        deleteMovie(movie.id).then((message) => {
-            console.log('message', message);
-            alert(message);
-            navigate(0);
-        }).catch(() => { })
-            .finally(() => {
-                setLoadingState(false);
-            });
+            deleteMovie(movie.id)
+                .then((message) => {
+                    console.log('message', message);
+                    alert(message);
+                    navigate(0);
+                }).catch(() => {
+                    alert('Error while deleting movie');
+                })
+                .finally(() => {
+                    setLoadingState(false);
+                });
     }
 
-    const bookTicketAction = () => {
-        if (preview) {
-            console.log('Book Ticket Action');
-            return null;
-        }
-        // TODO: Redirect to ticket booking page
-    }
 
     return (
         <div className="movie-card">
@@ -56,7 +51,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, preview }) => {
             <p className="movie-card-genre">Genre : {movie.genre.split('|').map((genre, i) => <span key={i}>{genre}</span>)}</p>
             <p className="movie-card-language">Language : {movie.language.split('|').map((language, i) => <span key={i}>{language}</span>)}</p>
             <p className="movie-card-overview">{movie.overview}</p>
-            <button className="movie-card-button" onClick={bookTicketAction}>Book Ticket</button>
+            <NavLink className="movie-card-button" to={`/book-ticket/${movie.id}`}>Book Ticket</NavLink>
         </div>
     )
 }

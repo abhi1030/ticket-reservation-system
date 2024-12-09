@@ -5,11 +5,16 @@ import { Show } from '../../../hooks/movie';
 // Props for the MovieSlot component
 interface MovieSlotProps {
     slot: Show;
+    clickAction?: (showId: number) => void;
 }
 
-const MovieSlot: React.FC<MovieSlotProps> = ({ slot }) => {
+const MovieSlot: React.FC<MovieSlotProps> = ({ slot, clickAction }) => {
+    const clickHandler = () => {
+        if(clickAction) clickAction(slot.id);
+    }
+
     return (
-        <div className="movie-slot">
+        <div className="movie-slot" onClick={clickHandler}>
             <div className="movie-slot-date-time">
                 <div className="movie-slot-date">Date : {slot.date}</div>
                 <div className="movie-slot-time">Time : {slot.slot}</div>

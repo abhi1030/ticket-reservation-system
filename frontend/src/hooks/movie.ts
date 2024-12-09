@@ -1,5 +1,4 @@
-import axios from '../lib/axios'
-
+import axios from '../lib/axios';
 
 export interface Show {
     id: number;
@@ -9,6 +8,7 @@ export interface Show {
     ticket_price: number;
     total_seats: number;
     available_seats: number;
+    tickets?: number;
 }
 
 export interface Movie {
@@ -90,4 +90,23 @@ const createShows = (movieId: number, ticketPrice: string, startDate: string, en
     });
 };
 
-export { listMovies, getMovie, createMovie, updateMovie, deleteMovie, createShows };
+const getShowInfo = (showId: number): Promise<Show> => {
+    return new Promise((resolve, reject) => {
+        axios.get(`/api/shows/${showId}`).then((res) => {
+            resolve(res.data);
+        }).catch(error => {
+            if (error.response && error.response.status === 401) reject(void 0);
+            reject(error);
+        });
+    });
+}
+
+export { 
+    listMovies,
+    getMovie,
+    createMovie,
+    updateMovie,
+    deleteMovie,
+    createShows,
+    getShowInfo
+};

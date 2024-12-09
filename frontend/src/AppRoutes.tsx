@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
-import PurchaseTicket from './pages/PurchaseTicket';
+import BookTicket from './pages/BookTicket';
 import PublicRoute from './components/PublicRoute';
 import { useLoading } from './context/PageLoadingContext';
 import PageLoader from './components/loaders/PageLoader';
@@ -13,7 +13,8 @@ import DashboardLayout from './components/Layouts/DashboardLayout';
 import Movies from './pages/Movies';
 import EditMovie from './pages/EditMovie';
 import CreateMovie from './pages/CreateMovie';
-import Tickets from './pages/Tickets';
+import Bookings from './pages/Bookings';
+import SingleBooking from './pages/SingleBooking';
 
 const AppRoutes = () => {
     const { loading } = useLoading();
@@ -35,8 +36,9 @@ const AppRoutes = () => {
                     <Route path="/movies" element={<ProtectedRoute><DashboardLayout><Movies /></DashboardLayout></ProtectedRoute>} />
                     <Route path="/movies/create" element={<ProtectedRoute><DashboardLayout><CreateMovie /></DashboardLayout></ProtectedRoute>} />
                     <Route path="/movies/:movieId" element={<ProtectedRoute><DashboardLayout><EditMovie /></DashboardLayout></ProtectedRoute>} />
-                    <Route path="/tickets" element={<ProtectedRoute><DashboardLayout><Tickets /></DashboardLayout></ProtectedRoute>} />
-                    <Route path="/purchase-ticket" element={<ProtectedRoute><DashboardLayout><PurchaseTicket /></DashboardLayout></ProtectedRoute>} />
+                    <Route path="/book-ticket/:movieId" element={<ProtectedRoute><DashboardLayout><BookTicket /></DashboardLayout></ProtectedRoute>} />
+                    <Route path="/bookings" element={<ProtectedRoute><DashboardLayout><Bookings /></DashboardLayout></ProtectedRoute>} />
+                    <Route path="/bookings/:bookingId" element={<ProtectedRoute><DashboardLayout><SingleBooking /></DashboardLayout></ProtectedRoute>} />
                 </Routes>
             </Router>
         </>

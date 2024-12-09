@@ -1,0 +1,128 @@
+.movie-booking-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+.movie-booking-preview {
+  box-shadow: 0 0 5px #ebebeb;
+}
+.movie-booking-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  height: 40px;
+  background-color: #ebebeb;
+}
+.movie-booking-poster {
+  width: 100%;
+}
+.movie-booking-section {
+  background-color: #ebebeb;
+}
+.movie-show-section {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+}
+.movie-show-seat-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: fit-content;
+  margin: auto;
+  padding: 20px;
+  gap: 20px;
+  grid-column: 2 / 3;
+}
+.movie-show-seat {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #999;
+  padding: 4px;
+  box-shadow: 0 0 5px #333;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.selected-seat {
+  background-color: #ff9d00;
+}
+.movie-show-seat:hover {
+  background-color: #f18300;
+}
+.movie-show-seat span {
+  font-size: 14px;
+  line-height: 1.2;
+  color: #444;
+  font-weight: 700;
+  background-color: #fff;
+  width: 100%;
+  text-align: center;
+}
+.show-seat-icon {
+  height: 100%;
+}
+.movie-show-info {    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px; 
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    color: #343a40;
+    gap: 10px;
+    grid-column: 1 / -1;
+}
+.movie-show-time,
+.movie-show-date,
+.movie-show-price {
+    text-transform: capitalize;
+  font-weight: 600;
+}
+.movie-show-checkout {
+  grid-column: 1 / 2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.movie-show-selected-seats {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #fff;
+  color: #444;
+}
+.movie-show-total-price {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #fff;
+  color: #444;
+}
+.movie-show-checkout-button {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px;
+  border: none;
+  color: #fff;
+  background-color: #f18300;
+  box-shadow: 0 0 10px #aaa;
+}
+.movie-show-checkout-button:hover {
+  background-color: #ff9d00;
+}
+.movie-show-unselected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  height: 100%;
+  font-size: 24px;
+  font-weight: 600;
+}

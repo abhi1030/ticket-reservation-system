@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('show_id')->constrained('shows')->onDelete('cascade');
+            $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade');
             $table->integer('seat_no');
             $table->enum('status', ['booked', 'canceled', 'pending'])->default('pending');
             $table->timestamps();

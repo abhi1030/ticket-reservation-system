@@ -9,17 +9,24 @@ class Payment extends Model
 {
     use HasFactory;
 
+    const STATUS_PENDING = 'pending';
+    const STATUS_SUCCESS ='completed';
+    const STATUS_FAILED = 'failed';
+
     protected $fillable = [
-        'ticket_id',
+        'user_id',
         'payment_method',
-        'transaction_id',
         'amount',
+        'currency',
+        'order_id',
+        'transaction_id',
+        'signature',
         'status',
     ];
 
     // A payment belongs to a ticket
-    public function ticket()
+    public function tickets()
     {
-        return $this->belongsTo(Ticket::class);
+        return $this->hasMany(Ticket::class);
     }
 }
