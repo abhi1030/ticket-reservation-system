@@ -70,10 +70,13 @@
     min-height: 150px;
     flex-shrink: 0;
 }
-
+.movie-slots-inner-wrapper {
+    display: grid
+;
+}
 .movie-slots-inner-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    overflow: auto;
     gap: 15px;
     padding: 15px;
 }

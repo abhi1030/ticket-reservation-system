@@ -17,7 +17,6 @@ const Login = () => {
         }
         setLoadingState(true);
         auth.login(email, password).then((response) => {
-            console.log(response);
             const userData = response as User;
             login(userData);
         }).catch((error) => {

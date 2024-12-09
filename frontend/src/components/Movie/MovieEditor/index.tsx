@@ -51,7 +51,7 @@ const MovieEditor: React.FC<MovieEditorProps> = ({ movie, handleSave }) => {
                 <button className="movie-editor-item-button" onClick={handleSaveAction}>Save Changes</button>
             </div>
             <div className="movie-editor-preview">
-                <MovieCard movie={movieData} preview={true} />
+                <MovieCard movie={movieData} preview={true} enableBookings={false} />
             </div>
         </div>
     );

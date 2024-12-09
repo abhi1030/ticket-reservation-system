@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('/bookings', [ShowController::class, 'getMyBookings']);
     Route::get('/bookings/{paymentId}', [ShowController::class, 'getBookingInfo']);
+
     // Route::get('movies/{movie}/tickets', [TicketController::class, 'index']);
     // Route::post('movies/{movie}/tickets/reserve', [TicketController::class, 'reserve']);
     // Route::post('movies/{movie}/tickets/cancel', [TicketController::class, 'cancel']);
@@ -31,3 +32,4 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 // Public Routes
 Route::post('/register', [AuthController::class, 'createUser']);
 Route::post('/login', [AuthController::class, 'loginUser']);
+Route::get('/latest-movies', [MovieController::class, 'latestMovies']);

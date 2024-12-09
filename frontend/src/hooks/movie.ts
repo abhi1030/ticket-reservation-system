@@ -101,6 +101,17 @@ const getShowInfo = (showId: number): Promise<Show> => {
     });
 }
 
+const getLatestMovies =  () => {
+    return new Promise((resolve, reject) => {
+        axios.get('/api/latest-movies').then((res) => {
+            resolve(res.data as Movie);
+        }).catch(error => {
+            if (error.response && error.response.status === 401) reject(void 0);
+            reject(error);
+        });
+    });
+};
+
 export { 
     listMovies,
     getMovie,
@@ -108,5 +119,6 @@ export {
     updateMovie,
     deleteMovie,
     createShows,
-    getShowInfo
+    getShowInfo,
+    getLatestMovies
 };

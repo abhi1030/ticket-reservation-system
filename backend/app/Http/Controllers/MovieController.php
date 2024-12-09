@@ -45,7 +45,10 @@ class MovieController extends Controller
      */
     public function show($id)
     {
-        $movie = Movie::with('shows')->find($id);
+        $movie = Movie::with(['shows' => function($query) {
+                $query->where('date', '>=', date('Y-m-d'))
+                    ->orderBy('date', 'asc');
+            }])->find($id);
 
         if (!$movie) {
             return response()->json(['message' => 'Movie not found'], 404);
@@ -59,7 +62,7 @@ class MovieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $movie = Movie::find($id);
+        $movie = Movie::with('shows')->find($id);
 
         if (!$movie) {
             return response()->json(['message' => 'Movie not found'], 404);
@@ -96,5 +99,19 @@ class MovieController extends Controller
         $movie->delete();
 
         return response()->json(['message' => 'Movie deleted successfully']);
+    }
+
+    /**
+     * Get latest movies available.all shows of a movie.
+     */
+    public function latestMovies()
+    {
+        $movies = Movie::whereHas('shows', function ($query) {
+                $query->where('date', '>=', date('Y-m-d'));
+            })
+            ->orderBy('release_date', 'asc')
+            ->get();
+
+        return response()->json($movies);
     }
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { Movie, getMovie, updateMovie } from "../hooks/movie";
 import { useLoading } from "../context/PageLoadingContext";
 import LoaderSpinner from '../components/loaders/LoadingSpinner';
@@ -46,16 +46,20 @@ const EditMovie = () => {
         <>
             <div className="page-content-header">
                 <p className="page-content-header-title">Edit Movie</p>
-                <p>Movie ID: {movieId}</p>
+                <div className="page-content-header-actions">
+                    <NavLink to="/movies/create" className="add-movie-button">Create New Movie</NavLink>
+                </div>
             </div>
 
             <div className="movie-slots-container">
                 <div className="movie-slots-header">Available Shows</div>
                 {movieData?.shows?.length ? (
-                    <div className="movie-slots-inner-container">
-                        {movieData.shows.map((slot, i) => <MovieSlot key={i} slot={slot} />)}
+                    <div className="movie-slots-inner-wrapper">
+                        <div className="movie-slots-inner-container">
+                            {movieData.shows.map((slot, i) => <MovieSlot key={i} slot={slot} />)}
+                        </div>
                     </div>
-                ) : movieData?.id ? <MovieSlotAdd movieData={movieData} setMovieData={setMovieData}/> : <LoaderSpinner /> }
+                ) : movieData?.id ? <MovieSlotAdd movieData={movieData} setMovieData={setMovieData} /> : <LoaderSpinner />}
             </div>
 
             <div className="edit-movie-container">

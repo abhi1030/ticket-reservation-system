@@ -1,7 +1,9 @@
+import LatestMovies from "../components/Movie/LatestMovies";
+
 const Home = () => {
     return (
         <div>
-            <h1>Latest Movies Currently streaming</h1>
+            <LatestMovies />
         </div>
     );
 };

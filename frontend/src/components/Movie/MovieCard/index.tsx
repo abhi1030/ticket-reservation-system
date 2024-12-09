@@ -9,9 +9,10 @@ import { useLoading } from '../../../context/PageLoadingContext';
 interface MovieCardProps {
     movie: Movie;
     preview?: boolean;
+    enableBookings?: boolean;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ movie, preview }) => {
+const MovieCard: React.FC<MovieCardProps> = ({ movie, preview, enableBookings = true }) => {
     const navigate = useNavigate();
     const { setLoadingState } = useLoading();
 
@@ -19,17 +20,17 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, preview }) => {
         if (movie.id === undefined) return;
 
         setLoadingState(true);
-            deleteMovie(movie.id)
-                .then((message) => {
-                    console.log('message', message);
-                    alert(message);
-                    navigate(0);
-                }).catch(() => {
-                    alert('Error while deleting movie');
-                })
-                .finally(() => {
-                    setLoadingState(false);
-                });
+        deleteMovie(movie.id)
+            .then((message) => {
+                console.log('message', message);
+                alert(message);
+                navigate(0);
+            }).catch(() => {
+                alert('Error while deleting movie');
+            })
+            .finally(() => {
+                setLoadingState(false);
+            });
     }
 
 
@@ -51,7 +52,11 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, preview }) => {
             <p className="movie-card-genre">Genre : {movie.genre.split('|').map((genre, i) => <span key={i}>{genre}</span>)}</p>
             <p className="movie-card-language">Language : {movie.language.split('|').map((language, i) => <span key={i}>{language}</span>)}</p>
             <p className="movie-card-overview">{movie.overview}</p>
-            <NavLink className="movie-card-button" to={`/book-ticket/${movie.id}`}>Book Ticket</NavLink>
+            {enableBookings ? (
+                <NavLink className="movie-card-button" to={`/book-ticket/${movie.id}`}>Book Ticket</NavLink>
+            ) : (
+                <button className="movie-card-button" disabled>Book Ticket</button>
+            )}
         </div>
     )
 }

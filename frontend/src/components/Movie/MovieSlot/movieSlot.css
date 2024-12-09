@@ -1,5 +1,5 @@
 .movie-slot {
-    min-width: 300px;
+    min-width: 350px;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -46,6 +46,7 @@
 .movie-slot-ticket-price span {
     font-style: italic;
     font-size: 60px;
+    white-space: nowrap;
 }
 .movie-slot-seats-info {
     display: flex;
