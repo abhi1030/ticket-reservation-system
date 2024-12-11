@@ -1,13 +1,13 @@
 import './movieBooking.css';
 
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Sofa } from "lucide-react";
 import { Movie, Show } from "../../../hooks/movie";
 import { createPayment } from "../../../hooks/payment";
-import { useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { useLoading } from '../../../context/PageLoadingContext';
 import makePayment from '../../../lib/razorpay';
-import { useNavigate } from 'react-router-dom';
 
 // Props for the MovieBooking component
 interface MovieBookingProps {
@@ -21,7 +21,15 @@ const MovieBooking: React.FC<MovieBookingProps> = ({ movie, show }) => {
     const [selectedSeats, setSelectedSeats] = useState<number[]>([]);
     const { setLoadingState } = useLoading();
 
+    useEffect(() => {
+        setSelectedSeats([]);
+    }, [show]);
+
     const selectSeatHandler = (seatNo: number) => {
+        if (show?.tickets?.find((ticket) => {
+            return ticket.seat_no === seatNo && ticket.status === 'booked'
+        })) return; // Check if the seat is already booked
+
         setSelectedSeats((prevSelectedSeats) =>
             prevSelectedSeats.includes(seatNo)
                 ? prevSelectedSeats.filter((seat) => seat !== seatNo) // Remove the seat if already selected
@@ -39,11 +47,11 @@ const MovieBooking: React.FC<MovieBookingProps> = ({ movie, show }) => {
         createPayment(show?.id, selectedSeats)
             .then((data) => {
                 makePayment(user, data.payment.order_id, data.payment.amount, data.payment.currency)
-                   .then((response) => {
+                    .then((response) => {
                         console.log(response);
                         navigate(`/bookings/${response.payment.id}`);
                     })
-                   .catch((error) => {
+                    .catch((error) => {
                         console.log(error);
                         alert(error);
                     });
@@ -54,6 +62,22 @@ const MovieBooking: React.FC<MovieBookingProps> = ({ movie, show }) => {
             .finally(() => {
                 setLoadingState(false);
             });
+    }
+
+    const addClasses = (seatno: number) => {
+        let classes = '';
+        if (selectedSeats.includes(seatno)) classes += ' selected-seat';
+
+        show?.tickets?.map((ticket) => {
+            if (ticket.seat_no === seatno && ticket.status == 'booked') {
+                if (ticket.user_id == user?.id) {
+                    classes += ' my-seat';
+                }
+                else classes += ' booked-seat';
+            }
+        });
+
+        return classes;
     }
 
     return (
@@ -82,7 +106,7 @@ const MovieBooking: React.FC<MovieBookingProps> = ({ movie, show }) => {
                         <div className="movie-show-seat-container">
                             {Array.from({ length: 20 }, (__, i) => (
                                 <div key={i + 1}
-                                    className={`movie-show-seat ${selectedSeats.includes(i + 1) ? 'selected-seat' : ''}`}
+                                    className={`movie-show-seat${addClasses(i + 1)}`}
                                     onClick={() => selectSeatHandler(i + 1)} >
                                     <Sofa className="show-seat-icon" color="#fff" size={32} />
                                     <span>{i + 1}</span>

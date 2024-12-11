@@ -12,6 +12,21 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
     /**
+     * 
+     */
+    public function getUser(Request $request)
+    {
+        $user = $request->user();
+        $permissions = $user->getAllPermissions()->pluck('name')->toArray();
+        $user->makeHidden(['roles', 'permissions', 'password', 'created_at', 'updated_at']);
+
+        $response = $user->toArray();
+        $response['permissions'] = $permissions;
+        
+        return response()->json($response, 200);
+    }
+
+    /**
      * Create User
      * @param Request $request
      * @return User 
@@ -40,6 +55,7 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password)
             ]);
+            $user->assignRole('user');
 
             return response()->json([
                 'status' => true,

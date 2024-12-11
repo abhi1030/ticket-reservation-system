@@ -23,6 +23,7 @@ const BookTicket = () => {
     }, []);
 
     const selectShow = (showId: number) => {
+        if(showInfo?.id === showId) return
         setLoadingState(true);
         getShowInfo(showId)
             .then(data => setShowInfo(data))
@@ -45,7 +46,7 @@ const BookTicket = () => {
                 {movieData?.shows?.length ? (
                     <div className="book-ticket-shows-wrapper">
                         <div className="book-ticket-shows-container">
-                            {movieData.shows.map((slot, i) => <MovieSlot key={i} slot={slot} clickAction={selectShow} />)}
+                            {movieData.shows.map((slot, i) => <MovieSlot key={i} slot={slot} classList={showInfo?.id === slot.id? "selected" : ""} clickAction={selectShow} />)}
                         </div>
                     </div>
                 ) : movieData?.id ? (

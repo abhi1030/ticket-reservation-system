@@ -253,7 +253,10 @@ class ShowController extends Controller
             },
             'tickets.show.movie' => function ($query) {
                 $query->select('id', 'name', 'overview', 'poster');
-            }])->where('user_id', $user_id)->get();
+            }])
+            ->where('user_id', $user_id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return response()->json(['message' => 'My bookings', 'bookings' => $payments], 200);
     }

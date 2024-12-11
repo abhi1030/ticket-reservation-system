@@ -8,9 +8,7 @@ use App\Http\Controllers\ShowController;
 
 // protected Routes
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+    Route::get('/user', [AuthController::class, 'getUser']);
     Route::post('/logout', [AuthController::class, 'logoutUser']);
     
     Route::apiResource('/movies', MovieController::class);

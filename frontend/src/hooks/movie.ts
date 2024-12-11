@@ -1,5 +1,14 @@
 import axios from '../lib/axios';
 
+export interface Ticket {
+    id: number;
+    user_id: number;
+    payment_id: number;
+    show_id: number;
+    seat_no: number;
+    status: string;
+}
+
 export interface Show {
     id: number;
     movie_id: number;
@@ -8,7 +17,7 @@ export interface Show {
     ticket_price: number;
     total_seats: number;
     available_seats: number;
-    tickets?: number;
+    tickets?: Ticket[];
 }
 
 export interface Movie {

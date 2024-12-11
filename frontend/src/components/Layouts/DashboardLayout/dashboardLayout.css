@@ -56,7 +56,6 @@
 .sidebar-link-active {
     background-color: #ffa500;
     color: #fff;
-    cursor: unset;
 }
 
 .edit-movie-container {

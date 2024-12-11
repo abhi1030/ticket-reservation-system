@@ -8,6 +8,11 @@
     border-radius: 5px;
     box-shadow: 2px 2px 4px 2px #d9d9d9;
 }
+.movie-slot.selected {
+    pointer-events: none;
+    background-color: #d6ffd1;
+    box-shadow: 2px 2px 2px 0px #ebebeb;
+}
 .movie-slot:hover {
     cursor: pointer;
     background-color: #f8f8f8;

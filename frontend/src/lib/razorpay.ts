@@ -48,7 +48,7 @@ const makePayment = (user: User, orderId: string, amount: number, currency: stri
         const razorpay = new (window as any).Razorpay(options);
         razorpay.open();
         razorpay.on('payment.failed', (response: any) => {
-            reject(response);
+            console.error(response);
         });
     });
 };

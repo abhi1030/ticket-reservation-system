@@ -49,6 +49,14 @@
 .selected-seat {
   background-color: #ff9d00;
 }
+.booked-seat {
+    pointer-events: none;
+    background-color: #ff5733 !important;
+}
+.my-seat {
+    pointer-events: none;
+    background-color: #31ae12 !important;
+}
 .movie-show-seat:hover {
   background-color: #f18300;
 }
