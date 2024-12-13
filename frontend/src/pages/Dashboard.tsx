@@ -1,13 +1,17 @@
+
 import { useAuth } from "../context/AuthContext";
+import Performance from "../components/Charts/Performance";
+import { hasPermission } from "../lib/permission";
+import MovieRecomendations from "../components/Movie/MovieRecomendations";
+import UpcomingBookings from "../components/Movie/UpcomingBookings";
 
 const Dashboard = () => {
 
     const { user } = useAuth();
     return (
         <div>
-            <h1>Welcome to the Movie Booking System</h1>
-            <p>Hello {user?.name}!</p>
-
+            <UpcomingBookings />
+            {hasPermission(user, 'view performance') ? <Performance /> :<MovieRecomendations />}
         </div>
     );
 };

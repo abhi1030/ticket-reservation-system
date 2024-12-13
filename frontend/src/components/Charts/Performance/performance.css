@@ -1,0 +1,73 @@
+.performance-container {
+    margin: 20px 0;
+}
+.performance-header {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f2f2f2;
+}
+.performance-stat-container {
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+.performance-stat {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.performance-stat-title {
+    font-size: 18px;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+.performance-stat-ticket {
+    font-size: 28px;
+    min-height: 35px;
+    font-weight: 600;
+    color: #2563eb;
+    text-align: center;
+}
+.performance-stat-revenue {
+    font-size: 28px;
+    min-height: 35px;
+    font-weight: 600;
+    color: #16a34a;
+    text-align: center;
+}
+.chart-loader {
+    min-height: 300px;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.chart-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+.chart-container {
+    width:100%;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.chart-title {
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.chart {
+    width: 100%;
+}

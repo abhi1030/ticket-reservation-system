@@ -110,16 +110,27 @@ const getShowInfo = (showId: number): Promise<Show> => {
     });
 }
 
-const getLatestMovies =  () => {
+const getLatestMovies =  (): Promise<Movie[]> => {
     return new Promise((resolve, reject) => {
         axios.get('/api/latest-movies').then((res) => {
-            resolve(res.data as Movie);
+            resolve(res.data);
         }).catch(error => {
             if (error.response && error.response.status === 401) reject(void 0);
             reject(error);
         });
     });
 };
+
+const getRecomendations = (): Promise<Movie[]> => {
+    return new Promise((resolve, reject) => {
+        axios.get('/api/recomendations').then((res) => {
+            resolve(res.data);
+        }).catch(error => {
+            if (error.response && error.response.status === 401) reject(void 0);
+            reject(error);
+        });
+    });
+}
 
 export { 
     listMovies,
@@ -129,5 +140,6 @@ export {
     deleteMovie,
     createShows,
     getShowInfo,
-    getLatestMovies
+    getLatestMovies,
+    getRecomendations
 };

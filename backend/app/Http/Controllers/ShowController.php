@@ -262,6 +262,40 @@ class ShowController extends Controller
     }
 
     /**
+     * Get upcoming bookings
+     */
+    public function getUpcomingBookings()
+    {
+        $user_id = auth()->user()->id;
+        $bookings = Payment::with([
+            'tickets' => function($query) {
+                $query->select('id','payment_id', 'user_id','show_id', 'seat_no', 'status');
+            },
+            'tickets.show' => function ($query) {
+                $query->select('id', 'movie_id', 'date', 'slot', 'ticket_price');
+            },
+            'tickets.show.movie' => function ($query) {
+                $query->select('id', 'name', 'overview', 'poster');
+            }])
+            ->where('user_id', $user_id)
+            ->where('status', 'completed')
+            ->whereHas('tickets', function ($query) {
+                $query->whereHas('show', function ($subQuery) {
+                    $subQuery->whereBetween('date', [now(), now()->addDays(7)]);
+                });
+            })
+            ->orderByRaw('(
+                SELECT MIN(shows.date) 
+                FROM tickets 
+                JOIN shows ON tickets.show_id = shows.id 
+                WHERE tickets.payment_id = payments.id
+            ) ASC')
+            ->get();
+
+        return response()->json(['message' => 'My upcoming bookings', 'bookings' => $bookings], 200);
+    }
+
+    /**
      * Get booking info
      */
     public function getBookingInfo($payment_id)
@@ -282,5 +316,98 @@ class ShowController extends Controller
         }
 
         return response()->json(['message' => 'Show booking info', 'booking' => $booking_info], 200);
+    }
+
+    /**
+     * Get salse performance data.
+     */
+    public function getPerformanceData(Request $request)
+    {
+        $startOfWeek = Carbon::now()->startOfWeek();
+        $endOfWeek = Carbon::now()->endOfWeek();
+        $last7Days = collect();
+        for ($i = 6; $i >= 0; $i--) {
+            $last7Days->push(Carbon::now()->subDays($i)->toDateString());
+        }
+
+        // Fetching Payments data
+        $total_revenue = Payment::where('status', 'completed')->sum('amount');
+        $revenue_this_week = Payment::where('status', 'completed')
+            ->whereBetween('updated_at', [$startOfWeek, $endOfWeek])
+            ->sum('amount');
+        $revenue = Payment::where('status', 'completed')
+            ->selectRaw('DATE(updated_at) as date, SUM(amount) as total')
+            ->where('updated_at', '>=', Carbon::now()->subDays(7))
+            ->groupBy('date')->orderBy('date')
+            ->pluck('total', 'date');
+        $revenue_last_7days = $last7Days->map(function ($date) use ($revenue) {
+            return ['date' => $date, 'revenue' => $revenue->get($date, 0)];
+        })->toArray();
+        
+        // Fetching tickets data
+        $total_tickets = Ticket::where('status', 'booked')->count();
+        $tickets_this_week = Ticket::where('status', 'booked')
+            ->whereBetween('updated_at', [$startOfWeek, $endOfWeek])
+            ->count();
+        $tickets = Ticket::where('status', 'booked')
+            ->selectRaw('DATE(updated_at) as date, COUNT(*) as total')
+            ->where('updated_at', '>=', Carbon::now()->subDays(7))
+            ->groupBy('date')->orderBy('date')
+            ->pluck('total', 'date');
+        $tickets_last_7days = $last7Days->map(function ($date) use ($tickets) {
+            return ['date' => $date, 'tickets' => $tickets->get($date, 0)];
+        })->toArray();
+
+        return response()->json([
+            "total_revenue" => $total_revenue,
+            "revenue_this_week" => $revenue_this_week,
+            "revenue_last_7days" => $revenue_last_7days,
+            "total_tickets" => $total_tickets,
+            "tickets_this_week" => $tickets_this_week,
+            "tickets_last_7days" => $tickets_last_7days
+        ]);
+    }
+
+    /**
+     * Get movie recomendations
+     */
+    public function getMovieRecommendations(Request $request)
+    {
+        $userId = $request->user()->id;
+
+        // Get preferred genres as an array
+        $bookedGenres = DB::table('movies')
+            ->join('shows', 'movies.id', 'shows.movie_id')
+            ->join('tickets', 'shows.id', '=', 'tickets.show_id')
+            ->where('tickets.user_id', $userId)
+            ->pluck('movies.genre')
+            ->flatMap(function ($genres) {
+                return explode('|', $genres);
+            })
+            ->unique()
+            ->toArray();
+
+        // Build raw SQL for genres
+        $genreConditions = implode(' OR ', array_map(fn($genre) => "movies.genre LIKE '%$genre%'", $bookedGenres));
+
+        $query = DB::table('movies')
+            ->join('shows', 'movies.id', 'shows.movie_id')
+            ->select('movies.*')
+            ->whereNotIn('shows.id', function ($subquery) use ($userId) {
+                $subquery->select('show_id')
+                        ->from('tickets')
+                        ->where('user_id', $userId);
+            })
+            ->orWhereBetween('shows.date', [Carbon::now(), Carbon::now()->addDays(7)]);
+
+        if ($bookedGenres) {
+            $query->whereRaw("($genreConditions)");
+        }
+
+        $recomendations = $query->distinct()
+            ->limit(4)
+            ->get();
+
+        return response()->json($recomendations);
     }
 }

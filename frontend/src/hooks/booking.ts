@@ -38,14 +38,29 @@ export interface BookingInfo {
     tickets: Ticket[];
 }
 
+export interface SalesPerformance {
+    total_revenue: number;
+    revenue_this_week: number;
+    revenue_last_7days: {
+        date: string,
+        revenue: number
+    }[];
+    total_tickets: number;
+    tickets_this_week: number;
+    tickets_last_7days: {
+        date: string;
+        tickets: number;
+    }[];
+}
+
 const getBookingInfo = (bookingId: string): Promise<BookingInfo> => {
     return new Promise((resolve, reject) => {
         axios.get('/api/bookings/' + bookingId)
-           .then(response => {
+            .then(response => {
                 const booking = response.data.booking;
                 resolve(booking);
-           })
-           .catch(error => {
+            })
+            .catch(error => {
                 reject(error);
             });
     });
@@ -54,14 +69,44 @@ const getBookingInfo = (bookingId: string): Promise<BookingInfo> => {
 const getMyBookings = (): Promise<BookingInfo[]> => {
     return new Promise((resolve, reject) => {
         axios.get('/api/bookings')
-           .then(response => {
+            .then(response => {
                 const bookings = response.data.bookings;
                 resolve(bookings);
             })
-           .catch(error => {
+            .catch(error => {
                 reject(error);
             });
     });
 }
 
-export { getBookingInfo, getMyBookings };
+const getUpcomingBookings = (): Promise<BookingInfo[]> => {
+    return new Promise((resolve, reject) => {
+        axios.get('/api/upcoming-bookings')
+            .then(response => {
+                const bookings = response.data.bookings;
+                resolve(bookings);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+}
+
+const getPerformanceData = (): Promise<SalesPerformance> => {
+    return new Promise((resolve, reject) => {
+        axios.get('/api/sales-performance-data')
+            .then(response => {
+                const performanceData = response.data;
+                resolve(performanceData);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+}
+export {
+    getBookingInfo,
+    getMyBookings,
+    getUpcomingBookings,
+    getPerformanceData
+};

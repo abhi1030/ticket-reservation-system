@@ -10,7 +10,7 @@ const MoviesList = () => {
 
     useEffect(() => {
         getLatestMovies().then(data => {
-            setMoviesList(data as Movie[]);
+            setMoviesList(data);
         });
     }, [])
 

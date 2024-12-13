@@ -1,0 +1,90 @@
+.recomendations-container {
+    margin-bottom: 20px;
+}
+.recomendations-header {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f2f2f2;
+}
+.recomendations-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+.recomended-movie-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 350px;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.recomended-movie-bg {
+    position:absolute;
+    top: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    object-fit: cover;
+    z-index: -1;
+}
+.recomended-movie-info {
+    background-color: rgba(255, 255, 255, 0.4);
+    margin: 0;
+    padding: 5px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+.recomended-movie-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    text-shadow: #ffffff 0 0 4px;
+}
+.recomended-movie-release-date {
+    font-size: 12px;
+    font-weight: 500;
+    color: #000;
+    text-shadow: #ffffff 0 0 4px;
+}
+.recomended-movie-genre,
+.recomended-movie-language {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px;
+    margin: 4px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+    text-shadow: #ffffff 0 0 4px;
+}
+.recomended-movie-genre span,
+.recomended-movie-language span {
+    font-size: 8px;
+    line-height: 1;
+    padding: 3px 5px;
+    background-color: yellow;
+    border-radius: 8px;
+
+}
+.recomended-movie-language span{
+    background-color: orange;
+}
+.recomended-movie-book {
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 600;
+    margin-top: 10px;
+    display: inline-block;
+    text-decoration: none;
+    background-color: #e83e08;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}

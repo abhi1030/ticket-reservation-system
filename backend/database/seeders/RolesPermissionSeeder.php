@@ -14,19 +14,47 @@ class RolesPermissionSeeder extends Seeder
      */
     public function run(): void
     {
+        // Define roles
+        $roles = ['admin', 'editor', 'user'];
+
+        // Create roles
+        foreach ($roles as $roleName) {
+            Role::firstOrCreate(['name' => $roleName]);
+        }
+    
+        // Define Permissions
+        $permissions = [
+            'edit movies',
+            'delete movies',
+            'publish movies',
+            'book tickets',
+            'view performance'
+        ];
+
         // Create Permissions
-        Permission::create(['name' => 'edit movies']);
-        Permission::create(['name' => 'delete movies']);
-        Permission::create(['name' => 'publish movies']);
-        Permission::create(['name' => 'book tickets']);
+        foreach($permissions as $permissionName) {
+            Permission::firstOrCreate(['name' => $permissionName]);
+        }
+
+        // Assign permissions to admin role
+        $adminRole = Role::where('name', 'admin')->first();
+        if ($adminRole) {
+            $adminRole->syncPermissions($permissions); // Assign all permissions to Admin
+        }
     
-        // Create Roles and Assign Permissions
-        $admin = Role::create(['name' => 'admin']);
-        $editor = Role::create(['name' => 'editor']);
-        $user = Role::create(['name' => 'user']);
-    
-        $admin->givePermissionTo(['edit movies', 'delete movies', 'publish movies']);
-        $editor->givePermissionTo(['edit movies', 'publish movies']);
-        $user->givePermissionTo(['book tickets']);
+        // Assign permissions to editor role
+        $editorPermissions = ['edit movies', 'publish movies', 'view performance'];
+        $editorRole = Role::where('name', 'editor')->first();
+        if ($editorRole) {
+            $editorRole->syncPermissions($editorPermissions);
+        }
+
+        // Assign permissions to user role
+        $userPermissions = ['book tickets'];
+        $userRole = Role::where('name', 'user')->first();
+        if ($userRole) {
+            $userRole->syncPermissions($userPermissions);
+        }
+
     }
 }
