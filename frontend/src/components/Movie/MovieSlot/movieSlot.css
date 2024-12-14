@@ -68,3 +68,12 @@
     font-weight: 600;
     color: #00983e;
 }
+
+@media (max-width: 600px) {
+    .movie-slot {
+        min-width: 250px;
+    }
+    .movie-slot-ticket-price span {
+        font-size: 40px;
+    }
+}

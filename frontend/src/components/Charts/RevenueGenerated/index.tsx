@@ -39,6 +39,7 @@ const RevenueGenerated: React.FC<RevenueGeneratedProps> = ({ data }) => {
     // Chart options
     const chartOptions = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             title: {
                 display: false,

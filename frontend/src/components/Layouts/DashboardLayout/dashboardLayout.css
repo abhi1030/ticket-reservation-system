@@ -1,13 +1,15 @@
 .dashboard-layout {
     display: grid;
     grid-template-columns: 2fr 10fr;
-    min-height: calc(100vh - 58px);
+    height: calc(100vh - 58px);
 }
 
 .page-content {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .page-content-header {
@@ -16,7 +18,7 @@
     align-items: center;
     flex-shrink: 0;
     padding: 5px 15px;
-    background-color: #f2f2f2;
+    background-color: var(--background-color);
     margin-bottom: 15px;
     height: 50px;
 }
@@ -32,8 +34,12 @@
     gap: 10px;
 }
 .sidebar {
-    background-color: #f8f9fa;
-    padding: 20px;
+    position: relative;
+    background-color: var(--background-color);
+    padding: 10px;
+    z-index: 9;
+    min-width: 220px;
+    transition: all 0.3s ease;
 }
 
 .sidebar ul {
@@ -42,29 +48,67 @@
 }
 
 .sidebar-link {
-    display: block;
+    display: flex;
     font-size: 18px;
-    padding: 8px 16px;
+    padding: 8px;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 10px;
-    color: #343a40;
-    background-color: #e9ecef;
+    transition: all 0.3s ease;
+    color: var(--text-color);
     text-decoration: none;
     transition: all 0.3s ease;
     font-weight: 600;
+    height: 40px;
+    overflow: hidden;
+    white-space: nowrap;
 }
-
+.sidebar-link svg {
+    min-height: 24px;
+    min-width: 24px;
+}
+.sidebar-link:hover {
+    background-color: var(--secondary-color);
+    color: var(--text-in-bg-color);
+}
 .sidebar-link-active {
-    background-color: #ffa500;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--text-in-bg-color);
 }
-
+.sidebar-toggle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 15px;
+    color: var(--accent-color);
+    cursor: pointer;
+}
+.sidebar-toggle svg {
+    height: 35px;
+    width: 35px;
+}
+.sidebar-closed {
+    grid-template-columns: 0fr 10fr;
+}
+.sidebar-closed .sidebar{
+    min-width: 60px;
+    max-width: 60px;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+.sidebar-closed .sidebar-link {
+    justify-content: center;
+}
+.sidebar-closed .sidebar-link span {
+    display: none;
+}
 .edit-movie-container {
     height: 100%;
 }
 .movie-slots-container {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     margin-bottom: 20px;
     min-height: 150px;
     flex-shrink: 0;
@@ -83,7 +127,7 @@
     font-size: 20px;
     padding: 15px;
     font-weight: 600;
-    background-color: #e9ecef;
+    background-color: var(--background-color);
     letter-spacing: 1px;
 }
 .shows-not-available {
@@ -93,7 +137,7 @@
     height: 100%;
     font-size:20px;
     font-weight:600;
-    color:#444;
+    color: var(--text-color);
 }
 .booking-section {
     height: 100%;
@@ -106,4 +150,45 @@
     overflow: auto;
     gap: 15px;
     padding: 15px;
+}
+
+
+@media (max-width: 800px) {
+    .sidebar {
+        padding: 10px;
+    }
+    .sidebar-link {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar-closed,
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+    .sidebar-toggle {
+        display: flex
+    ;
+        left: calc(100% + 25px);
+        bottom: unset;
+        top: 10px;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .sidebar {
+        height: calc(100vh - 58px);
+        position: fixed;
+        top: 58px;
+        left: 0;
+    }
+    .sidebar-closed .sidebar {
+        left: -60px;
+    }
+    .sidebar-link {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
 }

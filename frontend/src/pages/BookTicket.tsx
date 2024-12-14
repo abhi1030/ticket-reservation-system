@@ -38,7 +38,6 @@ const BookTicket = () => {
         <>
             <div className="page-content-header">
                 <p className="page-content-header-title">Book Movie Ticket</p>
-                <p>Movie ID: {movieId}</p>
             </div>
 
             <div className="movie-slots-container">

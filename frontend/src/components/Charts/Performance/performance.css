@@ -71,3 +71,15 @@
 .chart {
     width: 100%;
 }
+.chart canvas {
+    max-width: 100%;
+}
+
+@media (max-width: 800px) {
+   .performance-stat-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .chart-group {
+        grid-template-columns: 1fr;
+    }
+}

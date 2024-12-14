@@ -1,35 +1,101 @@
 .header {
-    background-color: #333;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 30px;
+  background-color: var(--accent-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
 }
 .logo {
-    font-size: 28px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #fff;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--text-in-bg-color);
 }
-.nav-link-container {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    gap: 15px;
+.toggle-menu-icon {
+    display: none;
+    color: var(--text-in-bg-color);
 }
-.nav-link {
-    font-size: 16px;
-    font-weight: 600;
-    font-family: inherit;
-    text-decoration: none;
-    color: azure;
-    background: transparent;
-    border: none;
+.toggle-menu-icon svg {
+    height: 35px;
+    width: 35px;
     cursor: pointer;
 }
+.nav-link-container {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 15px;
+}
+.nav-link {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  text-decoration: none;
+  color: var(--text-in-bg-color);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
 .nav-link:hover {
-    color: #fff;
+  color: var(--secondary-color);
 }
 .nav-link-active {
-    color: orange;
+  color: var(--primary-color) !important;
+  font-weight: 400;
+  text-shadow: var(--text-in-bg-color) 0 1px 0;
+}
+
+@media (max-width: 600px) {
+    .header {
+        padding: 10px 15px;
+    }
+    .logo {
+        margin: auto;
+    }
+    .toggle-menu-icon {
+        display: flex;
+    }
+  .site-navigation {
+    position: fixed;
+    top: 58px;
+    background-color: var(--background-color);
+    left: 0;
+    width: 100vw;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .site-navigation.menu-open {
+    height: calc(100vh - 58px);
+  }
+  .nav-link-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+    gap: 15px;
+  }
+  .nav-link {
+    display: block;
+    width: 100%;
+    font-size: 18px;
+    text-align: left;
+    padding: 10px 16px;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    box-shadow: 0 0 10px var(--border-color);
+  }
+  .nav-link:hover {
+    color: var(--text-in-bg-color);
+    background-color: var(--secondary-color);
+  }
+  .nav-link-active {
+    color: var(--text-in-bg-color) !important;
+    background-color: var(--accent-color) !important;
+    font-weight: 600;
+  }
+  
 }

@@ -281,7 +281,7 @@ class ShowController extends Controller
             ->where('status', 'completed')
             ->whereHas('tickets', function ($query) {
                 $query->whereHas('show', function ($subQuery) {
-                    $subQuery->whereBetween('date', [now(), now()->addDays(7)]);
+                    $subQuery->whereBetween('date', [now()->format('Y-m-d'), now()->addDays(7)->format('Y-m-d')]);
                 });
             })
             ->orderByRaw('(

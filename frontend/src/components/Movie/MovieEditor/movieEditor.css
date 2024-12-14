@@ -8,7 +8,7 @@
     flex-direction: column;
     gap: 10px;
     padding: 15px;
-    background-color: #f2f2f2;
+    background-color: var(--background-color);
 }
 .movie-editor-item-group {
     display: grid;
@@ -19,7 +19,7 @@
 .movie-editor-item-label {
     font-size: 16px;
     font-weight: 600;
-    color: #343a40;
+    color: var(--text-color);
 }
 .movie-editor-item-input {
     padding: 10px;
@@ -34,11 +34,23 @@
 }
 .movie-editor-item-button {
     padding: 10px 20px;
-    background-color: #1086b5;
-    color: #fff;
+    background-color: var(--accent-color);
+    color: var(--text-in-bg-color);
     border: none;
     width: fit-content;
     align-self: flex-end;
     margin-top: 20px;
     cursor: pointer;
+}
+.movie-editor-item-button:hover {
+    background-color: var(--primary-color);
+}
+
+@media (max-width: 800px) {
+    .movie-editor-container {
+        grid-template-columns: 1fr;
+    }
+    .movie-editor-preview {
+        margin: auto;
+    }
 }

@@ -39,6 +39,7 @@ const TicketsPurchased: React.FC<TicketsPurchasedProps> = ({ data }) => {
     // Chart options
     const chartOptions = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
             title: {
                 display: false,

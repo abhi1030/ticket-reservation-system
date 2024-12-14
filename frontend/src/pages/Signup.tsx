@@ -30,7 +30,7 @@ const Signup = () => {
     };
 
     return (
-        <div>
+        <div className="signup-container">
             <h2 className="text-center">SignUp</h2>
             <div className="form">
                 <div className="form-group">

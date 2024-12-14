@@ -1,7 +1,7 @@
 :root {
-  --primary-color: #ff6b00;
-  --secondary-color: #ffa500;
-  --accent-color: #ffc107;
+  --primary-color: #FF6500;
+  --secondary-color: #FFB200;
+  --accent-color: #B43F3F;
   --text-color: #333333;
   --text-in-bg-color: #ffffff;
   --muted-text-color: #666666;
@@ -29,7 +29,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
+.login-container,
+.signup-container {
+    margin: 40px 20px;
+}
 .text-center {
   text-align: center;
 }
@@ -76,7 +79,7 @@ code {
   margin-top: 30px;
 }
 .signup-btn {
-  background-color: var(--secondary-color);
+  background-color: var(--accent-color);
   color: var(--text-in-bg-color);
   padding: 12px;
   border: none;

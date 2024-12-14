@@ -92,7 +92,11 @@
 }
 
 @media (max-width: 768px) {
-    .event-details {
+    .payment-details {
         grid-template-columns: 1fr;
+    }
+    .ticket-selection {
+        grid-column: 1;
+        grid-row: 3;
     }
 }
