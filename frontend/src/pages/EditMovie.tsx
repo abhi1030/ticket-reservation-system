@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 import { Movie, getMovie, updateMovie } from "../hooks/movie";
 import { useLoading } from "../context/PageLoadingContext";
 import LoaderSpinner from '../components/loaders/LoadingSpinner';
@@ -30,11 +31,11 @@ const EditMovie = () => {
                 // Set movie data to state
                 setMovieData(data as Movie);
                 console.log("Movie updated successfully");
-                alert("Movie updated successfully");
+                toast.success("Movie updated successfully");
                 resolve(data as Movie);
             }).catch((error) => {
                 console.log(error);
-                alert("Error updating movie")
+                toast.error("Error updating movie")
                 reject(error);
             }).finally(() => {
                 setLoadingState(false);

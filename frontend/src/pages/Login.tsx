@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import toast from "react-hot-toast";
 import auth from "../hooks/auth";
 import { useAuth, User } from "../context/AuthContext";
 import { useLoading } from "../context/PageLoadingContext";
@@ -13,7 +14,7 @@ const Login = () => {
     const handleLogin = () => {
 
         if (email === "" || password === "") {
-            alert("Please enter email and password");
+            toast.error("Please enter email and password");
             return;
         }
         setLoadingState(true);
@@ -22,7 +23,7 @@ const Login = () => {
             login(userData);
         }).catch((error) => {
             console.log(error);
-            alert("Login failed");
+            toast.error(error.response.data.message);
         }).finally(() => {
             setLoadingState(false);
         });

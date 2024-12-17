@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import toast from "react-hot-toast";
 import auth from "../hooks/auth";
 import { useLoading } from "../context/PageLoadingContext";
 import { useAuth, User } from "../context/AuthContext";
@@ -14,7 +15,7 @@ const Signup = () => {
 
     const handleSignup = () => {
         if (name === "" || email === "" || password === "" || confirmPassword === "") {
-            alert("Please fill all fields");
+            toast.error("Please fill all fields");
         }
         setLoadingState(true);
         auth.register(name, email, password, confirmPassword)
@@ -24,7 +25,8 @@ const Signup = () => {
                 login(userData);
             })
             .catch((error) => {
-                alert(error.message);
+                // console.log(error)
+                toast.error(error);
             }).finally(() => {
                 setLoadingState(false);
              });

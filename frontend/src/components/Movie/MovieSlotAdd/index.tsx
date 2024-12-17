@@ -2,6 +2,7 @@
 import './movieSlotAdd.css';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Movie, createShows } from '../../../hooks/movie';
 import { useLoading } from '../../../context/PageLoadingContext';
 
@@ -19,7 +20,7 @@ const MovieSlotAdd: React.FC<MovieSlotAddProps> = ({ movieData, setMovieData }) 
 
     const addShowsHandler = () => {
         if (!movieData?.id || !startDate || !endDate || !ticketPrice) {
-            alert('All fields are required!');
+            toast.error('All fields are required!');
         }
         else {
             setLoadingState(true);

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import MovieEditor from "../components/Movie/MovieEditor";
 import { Movie , createMovie } from "../hooks/movie";
 import { useLoading } from "../context/PageLoadingContext";
@@ -21,7 +22,7 @@ const CreateMovie = () => {
             setLoadingState(true);
             createMovie(movie).then((data) => {
                 const {id} = data as Movie;
-                alert('Movie created successfully');
+                toast.success('Movie created successfully');
                 resolve(null);
                 navigate(`/movies/${id}`);
             }).catch((error) => {

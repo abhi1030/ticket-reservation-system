@@ -1,6 +1,7 @@
 import './movieCard.css';
 
 import { useNavigate, NavLink } from "react-router-dom";
+import toast from "react-hot-toast";
 import { SquarePen, Trash2 } from 'lucide-react';
 import { Movie, deleteMovie } from '../../../hooks/movie';
 import { useLoading } from '../../../context/PageLoadingContext';
@@ -26,10 +27,10 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, preview, enableBookings = 
         deleteMovie(movie.id)
             .then((message) => {
                 console.log('message', message);
-                alert(message);
+                toast.success(message as string);
                 navigate(0);
             }).catch(() => {
-                alert('Error while deleting movie');
+                toast.error('Error while deleting movie');
             })
             .finally(() => {
                 setLoadingState(false);

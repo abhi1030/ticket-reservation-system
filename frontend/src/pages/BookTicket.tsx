@@ -20,7 +20,7 @@ const BookTicket = () => {
                 setMovieData(data as Movie);
             });
         }
-    }, []);
+    }, [movieId]);
 
     const selectShow = (showId: number) => {
         if(showInfo?.id === showId) return

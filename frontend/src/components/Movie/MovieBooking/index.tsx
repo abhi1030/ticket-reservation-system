@@ -2,6 +2,7 @@ import './movieBooking.css';
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from "react-hot-toast";
 import { Sofa } from "lucide-react";
 import { Movie, Show } from "../../../hooks/movie";
 import { createPayment } from "../../../hooks/payment";
@@ -39,7 +40,7 @@ const MovieBooking: React.FC<MovieBookingProps> = ({ movie, show }) => {
 
     const bookTicketHandler = () => {
         if (!show?.id || user == null) {
-            alert("Please select a show");
+            toast.error("Please select a show");
             return;
         }
 
@@ -53,11 +54,11 @@ const MovieBooking: React.FC<MovieBookingProps> = ({ movie, show }) => {
                     })
                     .catch((error) => {
                         console.log(error);
-                        alert(error);
+                        toast.error(error);
                     });
             }).catch((error) => {
                 console.log(error);
-                alert(error);
+                toast.error(error);
             })
             .finally(() => {
                 setLoadingState(false);
