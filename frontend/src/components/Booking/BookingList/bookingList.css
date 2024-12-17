@@ -33,6 +33,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     margin-bottom: 5px;
     grid-column: 1 / -1;
     padding: 0.5rem;
@@ -83,4 +84,10 @@
   border-radius: 5px;
   margin: 10px;
   font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .booking-card {
+       grid-template-columns: 1fr;
+    }
 }

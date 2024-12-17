@@ -1,5 +1,5 @@
 .header {
-  background-color: var(--accent-color);
+  background-color: var(--header-bg-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -44,8 +44,6 @@
 }
 .nav-link-active {
   color: var(--primary-color) !important;
-  font-weight: 400;
-  text-shadow: var(--text-in-bg-color) 0 1px 0;
 }
 
 @media (max-width: 600px) {

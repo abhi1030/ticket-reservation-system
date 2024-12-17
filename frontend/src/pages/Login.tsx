@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import auth from "../hooks/auth";
 import { useAuth, User } from "../context/AuthContext";
 import { useLoading } from "../context/PageLoadingContext";
@@ -42,6 +43,7 @@ const Login = () => {
                 </div>
                 <button className="login-btn" onClick={handleLogin}>Login</button>
             </div>
+            <div className="register-link">Don't have an account? <NavLink to="/signup">Register</NavLink></div>
         </div>
     );
 };

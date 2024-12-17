@@ -10,7 +10,7 @@
 }
 .movie-slot.selected {
     pointer-events: none;
-    background-color: #d6ffd1;
+    background-color: #d6ffd1 !important;
     box-shadow: 2px 2px 2px 0px #ebebeb;
 }
 .movie-slot:hover {
