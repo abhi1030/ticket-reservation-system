@@ -22,9 +22,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/bookings', [ShowController::class, 'getMyBookings']);
     Route::get('/upcoming-bookings', [ShowController::class, 'getUpcomingBookings']);
     Route::get('/bookings/{paymentId}', [ShowController::class, 'getBookingInfo']);
-
-    Route::get('/sales-performance-data', [ShowController::class, 'getPerformanceData']);
     Route::get('/recomendations', [ShowController::class, 'getMovieRecommendations']);
+
+    Route::group(['middleware' => ['permission:view performance']], function () {
+        Route::get('/sales-performance-data', [ShowController::class, 'getPerformanceData']);
+    });
 });
 
 // Public Routes
