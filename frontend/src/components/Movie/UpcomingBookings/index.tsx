@@ -10,7 +10,7 @@ const UpcomingBookings = () => {
     useEffect(() => {
         getUpcomingBookings()
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setBookings(data)
             })
             .catch(error => console.log(error));
@@ -23,7 +23,9 @@ const UpcomingBookings = () => {
                 <div className="upcoming-bookings-wrapper">
                     {bookings.map(booking => (
                         <div key={booking.id} className="upcoming-booking-card">
-                            <img className="upcoming-booking-poster" src={booking.tickets[0].show.movie.poster} />
+                            <img className="upcoming-booking-poster"
+                                src={booking.tickets[0].show.movie.poster}
+                                alt={booking.tickets[0].show.movie.name} />
                             < div className="upcoming-booking-info">
                                 <div className="upcoming-booking-name">{booking.tickets[0].show.movie.name}</div>
                                 <div className="upcoming-booking-details">

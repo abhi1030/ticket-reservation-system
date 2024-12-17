@@ -20,7 +20,7 @@ const MovieRecomendations = () => {
             <div className="recomendations-wrapper">
                 {recomendations?.map(movie => (
                     <div key={movie.id} className='recomended-movie-card'>
-                        <img className="recomended-movie-bg" src={movie.poster} />
+                        <img className="recomended-movie-bg" src={movie.poster} alt={movie.name} />
                         <div className="recomended-movie-info">
                             <div className="recomended-movie-name">{movie.name}</div>
                             <div className="recomended-movie-release-date">Release Date : {movie.release_date}</div>

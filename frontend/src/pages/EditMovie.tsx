@@ -21,7 +21,7 @@ const EditMovie = () => {
                 setMovieData(data as Movie);
             });
         }
-    }, []);
+    }, [movieId]);
 
     const handleSave = (movie: Movie): Promise<Movie> => {
         return new Promise((resolve, reject) => {

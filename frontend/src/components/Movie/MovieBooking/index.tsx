@@ -69,9 +69,9 @@ const MovieBooking: React.FC<MovieBookingProps> = ({ movie, show }) => {
         let classes = '';
         if (selectedSeats.includes(seatno)) classes += ' selected-seat';
 
-        show?.tickets?.map((ticket) => {
-            if (ticket.seat_no === seatno && ticket.status == 'booked') {
-                if (ticket.user_id == user?.id) {
+        show?.tickets?.forEach((ticket) => {
+            if (ticket.seat_no === seatno && ticket.status === 'booked') {
+                if (ticket.user_id === user?.id) {
                     classes += ' my-seat';
                 }
                 else classes += ' booked-seat';

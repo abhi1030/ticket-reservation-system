@@ -26,7 +26,7 @@ const BookingList = () => {
     return (
         <div className="bookings-list">
             {bookings.map(booking => (
-                <div className={`booking-card booking-state-${booking.status}`} onClick={(e) => openBooking(booking.id)}>
+                <div key={booking.id} className={`booking-card booking-state-${booking.status}`} onClick={(e) => openBooking(booking.id)}>
                     <div className="booking-card-header">
                         <h2>Booking ID : {booking.order_id}</h2>
                         <p>Booking Date : {parseDate(booking.updated_at)}</p>

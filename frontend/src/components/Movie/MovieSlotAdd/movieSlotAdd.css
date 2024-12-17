@@ -51,3 +51,10 @@
   color: #fff;
   cursor: pointer;
 }
+
+@media (max-width: 600px) {
+  .add-slot-form {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
